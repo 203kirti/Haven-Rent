@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import "../styles/Login.scss";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setLogin } from "../redux/state";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,11 +24,22 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      /* Get data after fetching */
-      const loggedIn = await response.json();
+      const result = await response.json();
 
+      if (response.ok) {
+        dispatch(
+          setLogin({
+            user: result.user,
+            token: result.token,
+          })
+        );
+        navigate("/");
+      } else {
+        setError(result.message); // Display error message from backend
+      }
     } catch (err) {
       console.log("Login failed", err.message);
+      setError("Login failed. Please try again.");
     }
   };
 
@@ -33,6 +47,8 @@ const LoginPage = () => {
     <div className="login">
       <div className="login_content">
         <form className="login_content_form" onSubmit={handleSubmit}>
+          {error && <div className="error">{error}</div>}{" "}
+          {/* Display error message */}
           <input
             type="email"
             placeholder="Email"
@@ -51,6 +67,7 @@ const LoginPage = () => {
         </form>
         <a href="/register">Don't have an account? Sign In Here</a>
       </div>
+      {/* <Footer/> */}
     </div>
   );
 };
