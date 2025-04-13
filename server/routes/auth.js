@@ -18,7 +18,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-/* USER REGISTER */
+
+/********            USER REGISTER        *********/
+
 router.post("/register", upload.single("profileImage"), async (req, res) => {
   try {
     /* Take all information from the form */
@@ -68,7 +70,8 @@ router.post("/register", upload.single("profileImage"), async (req, res) => {
   }
 });
 
-/* USER LOGIN*/
+/*******         USER LOGIN                ********/
+
 router.post("/login", async (req, res) => {
   try {
     /* Take the infomation from the form */
