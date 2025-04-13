@@ -4,15 +4,20 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 
+const authRoutes = require("./routes/auth.js");
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-// first connecting to mongodb database then making the server listen at port 
+/* Routes  */
+app.use("/auth", authRoutes);
 
+// first connecting to mongodb database then making the server listen at port 
 const PORT = 3001;
 mongoose
     .connect(process.env.MONGO_URL, {
+        dbName: "Haven_Rent",
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
