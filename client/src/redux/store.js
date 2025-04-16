@@ -6,7 +6,7 @@ import {
   persistStore,     // To create a persistor linked to the store
   persistReducer,   // To wrap our reducer with persistence capabilities
   FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER // Special action types that need to be ignored in middleware checks
-} from "redux-persist";
+} from "redux-persist" ;
 
 // Default storage mechanism (localStorage for web)
 import storage from "redux-persist/lib/storage";

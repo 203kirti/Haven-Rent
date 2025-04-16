@@ -16,11 +16,15 @@ export const userSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
+    setLogout: (state) => {
+      state.user = null;
+      state.token = null;
+    },
   }
 });
 
-export const { setLogin  // setLogin: is the action creator for triggering a login.
-    
+export const { setLogin,  // setLogin: is the action creator for triggering a login.
+    setLogout
 } = userSlice.actions;
 
 export default userSlice.reducer;
