@@ -18,10 +18,11 @@ const PORT = 3001;
 mongoose
     .connect(process.env.MONGO_URL, {
         dbName: "Haven_Rent",
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+        // useNewUrlParser: true,
+        // useUnifiedTopology: true,
     })
     .then(() => {
+        console.log(` Database connected! `);
         app.listen( PORT, () => console.log(`Server is running at Port:  ${PORT} ` ));
     })
     .catch((err) => console.log(`${err} did not connect `));
