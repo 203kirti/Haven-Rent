@@ -13,7 +13,7 @@ app.use(express.static("public"));
 
 /* Routes  */
 app.use("/auth", authRoutes);
-app.use("/properties", listingRoutes)
+app.use("/properties", listingRoutes);
 
 // first connecting to mongodb database then making the server listen at port 
 const PORT = 3001;
