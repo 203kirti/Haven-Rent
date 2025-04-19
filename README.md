@@ -1,6 +1,6 @@
 ** HAVENRENT **
 
-_Full Stack Home Rentals applicatio_
+_Full Stack Home Rentals application_
 
 ## Setup Instructions
 
@@ -25,7 +25,7 @@ _Full Stack Home Rentals applicatio_
 3. Create a `.env` file with the following variables:
    ```
    PORT=5000
-   MONGO_URI=mongodb://localhost:27017/mern-blueprint
+   MONGO_URI=your_mongodb_connection_string_here
    JWT_SECRET=your_jwt_secret
    ```
 
@@ -46,12 +46,8 @@ _Full Stack Home Rentals applicatio_
    npm install
    ```
 
-3. Create a `.env` file with the following variables:
-   ```
-   REACT_APP_API_URL=http://localhost:3000/api
-   ```
 
-4. Start the development server:
+3. Start the development server:
    ```
    npm start
    ```

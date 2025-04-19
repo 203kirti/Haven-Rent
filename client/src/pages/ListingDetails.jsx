@@ -124,12 +124,16 @@ const ListingDetails = () => {
         <hr />
 
         <div className="profile">
-          <img
-            src={`http://localhost:3001/${listing.creator.profileImagePath.replace(
-              "public"
-            )}`}
-            alt="ProfilePhoto"
-          />
+          {listing.creator?.profileImagePath && (
+            <img
+              src={`http://localhost:3001/${listing.creator.profileImagePath.replace(
+                "public",
+                ""
+              )}`}
+              alt="ProfilePhoto"
+            />
+          )}
+
           <h3>
             Hosted by {listing.creator.firstName} {listing.creator.lastName}
           </h3>
@@ -165,10 +169,11 @@ const ListingDetails = () => {
           <div>
             <h2>How long do you want to stay?</h2>
             <div className="date-range-calendar">
-              <DateRange ranges={dateRange} 
-              onChange={handleSelect}
+              <DateRange
+                ranges={dateRange}
+                onChange={handleSelect}
                 locale={enUS}
-               />
+              />
               {dayCount > 1 ? (
                 <h2>
                   ${listing.price} x {dayCount} nights
