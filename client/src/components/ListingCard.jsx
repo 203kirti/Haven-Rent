@@ -44,7 +44,7 @@ const ListingCard = ({
     setCurrentIndex((prevIndex) => (prevIndex + 1) % listingPhotoPaths.length);
   };
 
-  // add to wish list
+  
   /* ADD TO WISHLIST */
   const user = useSelector((state) => state.user);
   const wishList = user?.wishList || [];
