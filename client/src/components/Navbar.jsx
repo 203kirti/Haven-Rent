@@ -7,6 +7,7 @@ import { Search, Person, Menu } from "@mui/icons-material";
 import { useSelector, useDispatch } from "react-redux";
 import { setLogout } from "../redux/state";
 import "../styles/Navbar.scss";
+
 const Navbar = () => {
   const [dropdownMenu, setDropdownMenu] = useState(false);
 

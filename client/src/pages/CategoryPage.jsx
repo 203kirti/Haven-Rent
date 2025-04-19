@@ -1,25 +1,24 @@
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "../styles/List.scss";
+import Navbar from "../components/Navbar";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setListings } from "../redux/state";
-import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
-import Navbar from "../components/Navbar";
 import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
-// import Footer from "../components/Footer";
 
-const SearchPage = () => {
+const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
-  const { search } = useParams();
-  const listings = useSelector((state) => state.listings);
+  const { category } = useParams();
 
   const dispatch = useDispatch();
+  const listings = useSelector((state) => state.listings);
 
-  const getSearchListings = async () => {
+  const getFeedListings = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/properties/search/${search}`,
+        `http://localhost:3001/properties?category=${category}`,
         {
           method: "GET",
         }
@@ -29,20 +28,21 @@ const SearchPage = () => {
       dispatch(setListings({ listings: data }));
       setLoading(false);
     } catch (err) {
-      console.log("Fetch Search List failed!", err.message);
+      console.log("Fetch Listings Failed", err.message);
     }
   };
 
   useEffect(() => {
-    getSearchListings();
-  }, [search]);
+    getFeedListings();
+  }, [category]);
 
+  
   return loading ? (
     <Loader />
   ) : (
     <>
       <Navbar />
-      <h1 className="title-list">{search}</h1>
+      <h1 className="title-list">{category} listings</h1>
       <div className="list">
         {listings?.map(
           ({
@@ -77,4 +77,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default CategoryPage;
