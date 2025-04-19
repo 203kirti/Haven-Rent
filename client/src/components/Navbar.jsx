@@ -38,7 +38,7 @@ const Navbar = () => {
       </div>
       <div className="navbar_right">
         {user ? (
-          <a href="/create-listing" className="host">
+          <a href="/create-list" className="host">
             {" "}
             Become A Host
           </a>
@@ -81,12 +81,12 @@ const Navbar = () => {
             <Link to={`/${user._id}/wishList`}>Wish List</Link>
             <Link to={`/${user._id}/properties`}>Property List</Link>
             <Link to={`/${user._id}/reservations`}>Reservation List</Link>
-            <Link to="/create-listing">Become A Host</Link>
+            <Link to="/create-list">Become A Host</Link>
 
             <Link
               to="/login"
               onClick={() => {
-               dispatch(setLogout());
+                dispatch(setLogout());
               }}
             >
               Log Out
