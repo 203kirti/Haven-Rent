@@ -19,7 +19,7 @@ const ListingDetails = () => {
   const getListingDetails = async () => {
     try {
       const response = await fetch(
-        `https://haven-rent.onrender.com/properties/${listingId}`,
+        `http://localhost:3001/properties/${listingId}`,
         {
           method: "GET",
         }
@@ -69,16 +69,13 @@ const ListingDetails = () => {
         totalPrice: listing.price * dayCount,
       };
 
-      const response = await fetch(
-        "https://haven-rent.onrender.com/bookings/create",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(bookingForm),
-        }
-      );
+      const response = await fetch("http://localhost:3001/bookings/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingForm),
+      });
 
       if (response.ok) {
         navigate(`/${customerId}/trips`);
@@ -102,10 +99,7 @@ const ListingDetails = () => {
           {listing.listingPhotoPaths?.map((item, index) => (
             <img
               key={index}
-              src={`https://haven-rent.onrender.com/${item?.replace(
-                "public",
-                ""
-              )}`}
+              src={`http://localhost:3001/${item?.replace("public", "")}`}
               alt={`listing photo ${index + 1}`}
             />
           ))}
@@ -124,7 +118,7 @@ const ListingDetails = () => {
           {listing.creator && (
             <>
               <img
-                src={`https://haven-rent.onrender.com/${listing.creator.profileImagePath?.replace(
+                src={`http://localhost:3001/${listing.creator.profileImagePath?.replace(
                   "public",
                   ""
                 )}`}
