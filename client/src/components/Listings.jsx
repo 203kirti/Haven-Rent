@@ -39,13 +39,15 @@ const Listings = () => {
 
   const fetchLocations = async () => {
     try {
-      const res = await fetch("http://localhost:3001/properties/locations/all"); //city province 
+      const res = await fetch("http://localhost:3001/properties/locations/all");
       const data = await res.json();
+      console.log("Fetched Locations:", data); // ✅ Confirm output
       setLocations(data);
     } catch (err) {
       console.log("Failed to fetch locations", err.message);
     }
   };
+
 
   useEffect(() => {
     fetchLocations();
@@ -56,15 +58,14 @@ const Listings = () => {
   }, [getFeedListings]);
 
 
- const capitalize = (text) => {
-   if (!text) return "";
-   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
- };
+ const capitalize = (text) =>
+   text ? text.charAt(0).toUpperCase() + text.slice(1).toLowerCase() : "";
+
 
  
   return (
     <>
-      <div className="filters">
+      <div className="filters-container">
         <div className="category-list">
           {categories?.map((category, index) => (
             <div
@@ -79,21 +80,22 @@ const Listings = () => {
             </div>
           ))}
         </div>
-
-        <select
-          value={selectedLocation}
-          onChange={(e) => setSelectedLocation(e.target.value)}
-          className="location-dropdown"
-        >
-          <option value="">All Locations</option>
-          {locations.map(({ city, province, country }, index) => (
-            <option key={index} value={`${city}, ${province}, ${country}`}>
-              {`${capitalize(city)}, ${capitalize(province)}, ${capitalize(
-                country
-              )}`}
-            </option>
-          ))}
-        </select>
+        <div className="location-dropdown-container">
+          <select
+            value={selectedLocation}
+            onChange={(e) => setSelectedLocation(e.target.value)}
+            className="location-dropdown"
+          >
+            <option value="">All Locations</option>
+            {locations.map(({ city, province, country }, index) => (
+              <option key={index} value={`${city}, ${province}, ${country}`}>
+                {`${capitalize(city)}, ${capitalize(province)}, ${capitalize(
+                  country
+                )}`}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {loading ? (

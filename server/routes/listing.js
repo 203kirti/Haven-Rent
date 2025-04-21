@@ -83,10 +83,11 @@ router.get("/", async (req, res) => {
 
   try {
     let filter = {};
-    if (category) filter.category = category;
-    if (city) filter.city = city;
-    if (province) filter.province = province;
-    if (country) filter.country = country;
+
+    if (category) filter.category = new RegExp(`^${category}$`, "i");
+    if (city) filter.city = new RegExp(`^${city}$`, "i");
+    if (province) filter.province = new RegExp(`^${province}$`, "i");
+    if (country) filter.country = new RegExp(`^${country}$`, "i");
 
     const listings = await Listing.find(filter).populate("creator");
     res.status(200).json(listings);
@@ -98,21 +99,20 @@ router.get("/", async (req, res) => {
 
 /* GET UNIQUE LOCATIONS */
 router.get("/locations/all", async (req, res) => {
-  // get the cirty==
   try {
     const locations = await Listing.aggregate([
       {
         $project: {
           city: { $trim: { input: "$city" } },
           province: { $trim: { input: "$province" } },
-          country: { $trim: { input: "$country" } }
+          country: { $trim: { input: "$country" } },
         }
       },
       {
         $match: {
-          city: { $ne: null, $ne: "" },
-          province: { $ne: null, $ne: "" },
-          country: { $ne: null, $ne: "" }
+          city: { $nin: [null, ""] },
+          province: { $nin: [null, ""] },
+          country: { $nin: [null, ""] }
         }
       },
       {
@@ -136,9 +136,10 @@ router.get("/locations/all", async (req, res) => {
         $sort: { country: 1, province: 1, city: 1 }
       }
     ]);
-  
+
     res.status(200).json(locations);
   } catch (err) {
+    console.error("Location fetch error:", err.message);
     res.status(500).json({ message: "Failed to fetch locations", error: err.message });
   }
 });
