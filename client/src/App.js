@@ -15,11 +15,13 @@ import AboutUs from "./pages/AboutUs";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ReturnAndRefundPolicy from "./pages/ReturnAndRefundPolicy";
 import List from "./pages/List";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/list" element={<List />} />
@@ -36,7 +38,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/refund" element={<ReturnAndRefundPolicy />} />
-
+        
       </Routes>
       </BrowserRouter>
     </div>

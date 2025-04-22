@@ -38,7 +38,7 @@
                 font-size: 16px;
                 color: $blue;
                 padding: 5px 10px;
-    
+                font-weight: 40px;
                 &::placeholder {
                     color: $grey;
                 }
@@ -148,7 +148,8 @@
   &:hover {
     border-color: $pinkred;
     a {
-      color: $pinkred;
+      color: $blue;
+      font-weight:40px;
     }
   }
 }
