@@ -14,7 +14,7 @@ import SearchPage from "./pages/SearchPage";
 import AboutUs from "./pages/AboutUs";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ReturnAndRefundPolicy from "./pages/ReturnAndRefundPolicy";
-
+import List from "./pages/List";
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/list" element={<List />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-list" element={<CreateListing />} />

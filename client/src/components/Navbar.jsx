@@ -37,6 +37,10 @@ const Navbar = () => {
           />
         </IconButton>
       </div>
+      <button className="navbar_listings_button">
+        <Link to="/list">Listings</Link>
+      </button>
+
       <div className="navbar_right">
         {user ? (
           <a href="/create-list" className="host">

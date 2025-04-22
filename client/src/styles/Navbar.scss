@@ -1,6 +1,7 @@
 @import "./variables.scss";
 @import "./breakpoints.scss";
 
+
 .navbar {
     padding: 10px 60px;
     display: flex;
@@ -18,28 +19,40 @@
         cursor: pointer;
     }
 
-    &_search {
-        border: 1px solid $grey;
-        border-radius: 30px;
-        height: 50px;
-        padding: 0px 20px;
-        display: flex;
-        gap: 40px;
-        align-items: center;
-
-        input {
-            border: none;
-            outline: none;
+        &_search {
+            background-color: white;
+            border: 2px solid $blue;
+            border-radius: 30px;
+            height: 50px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+    
+            input {
+                flex: 1;
+                border: none;
+                outline: none;
+                background: transparent;
+                font-size: 16px;
+                color: $blue;
+                padding: 5px 10px;
+    
+                &::placeholder {
+                    color: $grey;
+                }
+            }
+    
+            &:hover {
+                @include shadow;
+                border-color: $pinkred;
+            }
+    
+            @include lg {
+                display: none;
+            }
         }
-
-        &:hover {
-            @include shadow;
-        }
-
-        @include lg {
-            display: none;
-        }
-    }
 
     &_right {
         display: flex;
@@ -115,4 +128,27 @@
             }
         }
     }
+}
+
+.navbar_listings_button {
+  background-color: white;
+  color: $blue;
+  font-weight: 600;
+  border: 2px solid $blue;
+  border-radius: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  a {
+    text-decoration: none;
+    color: inherit; // inherit the blue from the button
+  }
+
+  &:hover {
+    border-color: $pinkred;
+    a {
+      color: $pinkred;
+    }
+  }
 }
