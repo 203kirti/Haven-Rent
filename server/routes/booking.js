@@ -15,4 +15,23 @@ router.post("/create", async (req, res) => {
     }
 })
 
+// Get all booked date ranges for a listing
+router.get("/booked-dates/:listingId", async (req, res) => {
+  try {
+    const { listingId } = req.params;
+    const bookings = await Booking.find({ listingId });
+
+    const bookedRanges = bookings.map((booking) => ({
+      startDate: new Date(booking.startDate),
+      endDate: new Date(booking.endDate),
+    }));
+
+    res.status(200).json(bookedRanges);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: "Failed to fetch booked dates", error: err.message });
+  }
+});
+
+
 module.exports = router

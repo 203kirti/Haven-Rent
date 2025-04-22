@@ -12,9 +12,12 @@ import Footer from "../components/Footer";
 import { enUS } from "date-fns/locale";
 
 const ListingDetails = () => {
+
   const [loading, setLoading] = useState(true);
   const { listingId } = useParams();
   const [listing, setListing] = useState(null);
+  const [bookedDates, setBookedDates] = useState([]);
+
 
   const getListingDetails = async () => {
     try {
@@ -27,6 +30,22 @@ const ListingDetails = () => {
       const data = await response.json();
       setListing(data);
       setLoading(false);
+      const bookedRes = await fetch(
+        `http://localhost:3001/bookings/booked-dates/${listingId}`
+      );
+      const bookedData = await bookedRes.json();
+
+      const allBookedDates = [];
+      bookedData.forEach(({ startDate, endDate }) => {
+        let current = new Date(startDate);
+        const end = new Date(endDate);
+        while (current <= end) {
+          allBookedDates.push(new Date(current));
+          current.setDate(current.getDate() + 1);
+        }
+      });
+
+      setBookedDates(allBookedDates);
     } catch (err) {
       console.log("Fetch Listing Details failed", err.message);
     }
@@ -163,6 +182,7 @@ const ListingDetails = () => {
                 onChange={handleSelect}
                 minDate={new Date()} // Prevent selecting past dates
                 locale={enUS}
+                disabledDates={bookedDates}
               />
               {dayCount > 1 ? (
                 <h2>

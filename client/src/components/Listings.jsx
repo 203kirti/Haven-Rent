@@ -86,7 +86,7 @@ const Listings = () => {
             onChange={(e) => setSelectedLocation(e.target.value)}
             className="location-dropdown"
           >
-            <option value="">All Locations</option>
+            <option value=""  >All Locations</option>
             {locations.map(({ city, province, country }, index) => (
               <option key={index} value={`${city}, ${province}, ${country}`}>
                 {`${capitalize(city)}, ${capitalize(province)}, ${capitalize(
