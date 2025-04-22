@@ -146,6 +146,7 @@ router.get("/locations/all", async (req, res) => {
 
 
 /* GET LISTINGS BY SEARCH */
+/* GET LISTINGS BY SEARCH (updated to include location) */
 router.get("/search/:search", async (req, res) => {
   const { search } = req.params;
   try {
@@ -158,6 +159,9 @@ router.get("/search/:search", async (req, res) => {
         $or: [
           { category: { $regex: search, $options: "i" } },
           { title: { $regex: search, $options: "i" } },
+          { city: { $regex: search, $options: "i" } },
+          { province: { $regex: search, $options: "i" } },
+          { country: { $regex: search, $options: "i" } },
         ],
       }).populate("creator");
     }

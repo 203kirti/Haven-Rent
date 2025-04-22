@@ -24,7 +24,7 @@ const Navbar = () => {
       <div className="navbar_search">
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search by location or category"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
