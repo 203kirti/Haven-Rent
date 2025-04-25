@@ -76,9 +76,9 @@ const ListingDetails = () => {
 
   const navigate = useNavigate();
 
-  //const stripePromise = loadStripe(
-  //  process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
-  //);
+  const stripePromise = loadStripe(
+   process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+  );
 
   const handleSubmit = async () => {
     const stripe = await stripePromise;
