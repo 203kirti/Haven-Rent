@@ -10,14 +10,13 @@ import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import { enUS } from "date-fns/locale";
+//import { loadStripe } from "@stripe/stripe-js";
 
 const ListingDetails = () => {
-
   const [loading, setLoading] = useState(true);
   const { listingId } = useParams();
   const [listing, setListing] = useState(null);
   const [bookedDates, setBookedDates] = useState([]);
-
 
   const getListingDetails = async () => {
     try {
@@ -77,30 +76,47 @@ const ListingDetails = () => {
 
   const navigate = useNavigate();
 
+  //const stripePromise = loadStripe(
+  //  process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+  //);
+
   const handleSubmit = async () => {
+    const stripe = await stripePromise;
+
     try {
-      const bookingForm = {
-        customerId,
+      const body = {
         listingId,
+        price: listing.price * dayCount,
+        customerId,
         hostId: listing.creator._id,
         startDate: dateRange[0].startDate.toDateString(),
         endDate: dateRange[0].endDate.toDateString(),
-        totalPrice: listing.price * dayCount,
       };
 
-      const response = await fetch("http://localhost:3001/bookings/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingForm),
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      const response = await fetch(
+        "http://localhost:3001/stripe/create-checkout-session",
+        {
+          method: "POST",
+          headers,
+          body: JSON.stringify(body),
+        }
+      );
+
+      const session = await response.json();
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
       });
 
-      if (response.ok) {
-        navigate(`/${customerId}/trips`);
+      if (result.error) {
+        console.log(result.error);
       }
     } catch (err) {
-      console.log("Submit Booking Failed.", err.message);
+      console.log("Stripe Checkout Failed", err.message);
     }
   };
 
