@@ -10,7 +10,7 @@ import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import { enUS } from "date-fns/locale";
-//import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 const ListingDetails = () => {
   const [loading, setLoading] = useState(true);
@@ -70,14 +70,14 @@ const ListingDetails = () => {
   const end = new Date(dateRange[0].endDate);
   const dayCount = Math.round((end - start) / (1000 * 60 * 60 * 24));
 
-  // submit booking
+  
   /* SUBMIT BOOKING */
   const customerId = useSelector((state) => state?.user?._id);
 
   const navigate = useNavigate();
 
   const stripePromise = loadStripe(
-   process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+    process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
   );
 
   const handleSubmit = async () => {
@@ -213,7 +213,7 @@ const ListingDetails = () => {
               <p>Start Date: {dateRange[0].startDate.toDateString()}</p>
               <p>End Date: {dateRange[0].endDate.toDateString()}</p>
               <button className="button" type="submit" onClick={handleSubmit}>
-                BOOKING
+                Proceed for payment
               </button>
             </div>
           </div>

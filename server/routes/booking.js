@@ -1,6 +1,7 @@
+
 const router = require("express").Router()
 const Booking = require("../models/Booking");
-const stripe = require("stripe")(process.env.SECRET_KEY);
+const stripe = require("stripe")(process.env.SECRET_KEY); 
 
 
 require("dotenv").config();
@@ -88,5 +89,3 @@ router.get("/booked-dates/:listingId", async (req, res) => {
 
 
 module.exports = router
-
-

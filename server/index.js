@@ -8,11 +8,13 @@ const authRoutes = require("./routes/auth.js");
 const listingRoutes = require("./routes/listing.js");
 const bookingRoutes = require("./routes/booking.js")
 const userRoutes=require("./routes/user.js")
-
+const stripeRoutes = require("./routes/booking.js");
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
+app.use("/stripe", stripeRoutes);
+
 
 /* Routes  */
 app.use("/auth", authRoutes);
@@ -34,3 +36,8 @@ mongoose
         app.listen( PORT, () => console.log(`Server is running at Port:  ${PORT} ` ));
     })
     .catch((err) => console.log(`${err} did not connect `));
+
+
+
+
+

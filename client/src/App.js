@@ -1,3 +1,4 @@
+
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import './App.css';
 import HomePage from "./pages/HomePage" ;
@@ -16,6 +17,7 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import ReturnAndRefundPolicy from "./pages/ReturnAndRefundPolicy";
 import List from "./pages/List";
 import ScrollToTop from "./components/ScrollToTop";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 function App() {
   return (
@@ -38,7 +40,10 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/refund" element={<ReturnAndRefundPolicy />} />
-        
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+      
+
+
       </Routes>
       </BrowserRouter>
     </div>
