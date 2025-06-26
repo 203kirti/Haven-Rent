@@ -4,6 +4,7 @@ const Booking = require("../models/Booking");
 const stripe = require("stripe")(process.env.SECRET_KEY); 
 
 
+
 require("dotenv").config();
 
 /* CREATE BOOKING */
@@ -56,7 +57,6 @@ router.get("/session-details/:sessionId", async (req, res) => {
   }
 });
 
-module.exports = router;
 
 router.post("/create", async (req, res) => {
   try {
