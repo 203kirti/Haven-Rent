@@ -1,113 +1,156 @@
 @import "./variables.scss";
 @import "./breakpoints.scss";
 
-
 .navbar {
-    padding: 10px 60px;
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    position: relative;
+    justify-content: space-between;
+    padding: 0 60px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
 
     @include sm {
-        padding: 10px 20px;
+        padding: 0 20px;
     }
 
     img {
-        height: 90px;
-        width: 140px;
+        height: 70px;
+        width: auto;
         cursor: pointer;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
     }
 
-        &_search {
-            background-color: white;
-            border: 2px solid $blue;
-            border-radius: 30px;
-            height: 50px;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-    
-            input {
-                flex: 1;
-                border: none;
-                outline: none;
-                background: transparent;
-                font-size: 16px;
-                color: $blue;
-                padding: 5px 10px;
-                font-weight: 40px;
-                &::placeholder {
-                    color: $grey;
-                }
-            }
-    
-            &:hover {
-                @include shadow;
-                border-color: $pinkred;
-            }
-    
-            @include lg {
-                display: none;
+    &_search {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border: 2px solid $blue;
+        border-radius: 40px;
+        padding: 0 20px;
+        height: 48px;
+        gap: 10px;
+        transition: 0.3s ease all;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+        input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 15px;
+            color: $blue;
+            width: 200px;
+
+            &::placeholder {
+                color: $grey;
             }
         }
+
+        &:focus-within {
+            border-color: $pinkred;
+            box-shadow: 0 0 0 3px rgba($pinkred, 0.1);
+        }
+
+        @include lg {
+            display: none;
+        }
+    }
 
     &_right {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 16px;
 
         .host {
-            text-decoration: none;
-            color: $blue;
-            font-weight: 700;
-            cursor: pointer;
-
-            &:hover {
-                color: $pinkred;
+                color: white;
+                background: linear-gradient(135deg,
+                            darken($blue, 10%) 0%,
+                            $blue 30%,
+                            lighten($blue, 5%) 65%,
+                            $pinkred 90%);
+                padding: 10px 22px;
+                font-size: 15px;
+                font-weight: 600;
+                border-radius: 25px;
+                border: none;
+                cursor: pointer;
+                text-decoration: none;
+                box-shadow: 0 6px 18px rgba($pinkred, 0.25);
+                transition: all 0.3s ease-in-out;
+                position: relative;
+                overflow: hidden;
+        
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(255, 255, 255, 0.15);
+                    transform: skewX(-20deg);
+                    transition: 0.5s;
+                }
+        
+                &:hover::before {
+                    left: 100%;
+                }
+        
+                &:hover {
+                    transform: translateY(-2px) scale(1.02);
+                    box-shadow: 0 8px 20px rgba($pinkred, 0.35);
+                }
+        
+                @include sm {
+                    display: none;
+                }
             }
-
-            @include sm {
-                display: none;
-            }
-        }
 
         &_account {
-            height: 50px;
             display: flex;
             align-items: center;
-            padding: 0 10px;
-            border: 1px solid $grey;
-            border-radius: 30px;
-            display: flex;
-            gap: 10px;
+            gap: 8px;
             background-color: white;
+            border: 1px solid $lightgrey;
+            border-radius: 40px;
+            padding: 8px 16px;
             cursor: pointer;
+            transition: 0.2s ease;
 
             &:hover {
-                @include shadow;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
 
             img {
-                width: 40px;
-                height: 40px;
+                height: 32px;
+                width: 32px;
+                border-radius: 50%;
+                object-fit: cover;
             }
         }
 
         &_accountmenu {
             position: absolute;
-            background-color: white;
+            top: 90px;
             right: 60px;
-            top: 80px;
-            display: flex;
-            flex-direction: column;
-            width: 200px;
-            padding: 10px 0;
+            background-color: white;
+            border-radius: 16px;
             border: 1px solid $lightgrey;
-            border-radius: 20px;
-            @include shadow;
+            width: 220px;
+            padding: 12px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeInDown 0.3s ease;
             z-index: 9999;
 
             @include sm {
@@ -115,41 +158,86 @@
             }
 
             a {
-                width: 100%;
-                padding: 8px 15px;
-                text-decoration: none;
+                display: block;
+                padding: 12px 20px;
                 color: $blue;
-                font-weight: 700;
+                font-weight: 500;
+                text-decoration: none;
+                transition: background 0.2s ease;
 
                 &:hover {
+                    background: rgba(220, 220, 220, 0.3);
                     color: $pinkred;
-                    background-color: rgba(217, 213, 213, 0.2);
                 }
             }
         }
     }
 }
 
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 .navbar_listings_button {
-  background-color: white;
-  color: $blue;
-  font-weight: 600;
-  border: 2px solid $blue;
-  border-radius: 30px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  a {
+    background: linear-gradient(135deg,
+                darken($blue, 10%) 0%,
+                $blue 30%,
+                lighten($blue, 5%) 65%,
+                $pinkred 90%);
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
     text-decoration: none;
-    color: inherit; // inherit the blue from the button
-  }
-
-  &:hover {
-    border-color: $pinkred;
+    box-shadow: 0 6px 18px rgba($blue, 0.2);
+    transition: all 0.3s ease-in-out;
+    margin-right: 10px;
+    position: relative;
+    overflow: hidden;
+  
     a {
-      color: $blue;
-      font-weight:40px;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 600;
+    }
+  
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: skewX(-20deg);
+      transition: 0.5s ease-in-out;
+    }
+  
+    &:hover::before {
+      left: 100%;
+    }
+  
+    &:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 22px rgba($pinkred, 0.35);
+    }
+  
+    @include sm {
+      padding: 8px 16px;
+      font-size: 14px;
+      margin-right: 5px;
     }
   }
-}
+  
