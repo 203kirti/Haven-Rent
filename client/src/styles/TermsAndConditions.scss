@@ -1,83 +1,71 @@
-.terms-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-    font-family: 'Poppins', sans-serif;
-    color: #4a4a4a;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.terms-wrapper {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c2c2c;
+}
+
+.terms-header {
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 25px;
 
     h1 {
-        font-size: 3rem;
-        margin-bottom: 2rem;
-        color: #007bff;
-        text-align: center;
-        font-weight: 700;
-    }
-
-    h2 {
-        font-size: 2rem;
-        margin-top: 2.5rem;
-        margin-bottom: 1rem;
-        color: #0056b3;
-        position: relative;
-        padding-left: 20px;
-
-        &::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #007bff;
-            font-size: 2rem;
-            top: -2px;
-        }
+        font-size: 2.5rem;
+        color: #007BFF;
+        margin-bottom: 8px;
     }
 
     p {
-        font-size: 1.15rem;
-        line-height: 1.8;
-        margin-top: 1rem;
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 0;
+    }
+}
+
+.terms-section {
+    margin-bottom: 28px;
+
+    h2 {
+        font-size: 1.4rem;
+        color: #0056b3;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 12px;
     }
 
     ul {
-        margin-top: 1rem;
-        padding-left: 2rem;
+        list-style: none;
+        padding-left: 0;
 
         li {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 0.6rem;
-            list-style-type: disc;
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+
+            &::before {
+                content: "✔";
+                position: absolute;
+                left: 0;
+                color: #007BFF;
+                font-weight: bold;
+            }
         }
     }
+}
 
-    strong {
-        color: #007bff;
-    }
-
-    // Tagline special at end
-    .thank-you {
-        margin-top: 3rem;
-        font-size: 1.3rem;
-        text-align: center;
-        color: #555;
-    }
-
-    @media (max-width: 768px) {
-        padding: 2rem 1rem;
-
-        h1 {
-            font-size: 2.2rem;
-        }
-
-        h2 {
-            font-size: 1.6rem;
-        }
-
-        p,
-        li {
-            font-size: 1rem;
-        }
-    }
+.terms-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 1.05rem;
+    color: #333;
 }
